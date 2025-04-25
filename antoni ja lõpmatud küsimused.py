@@ -18,8 +18,8 @@ stu = [
     student("настя(tarpv24)", 100),
     student("ждун", 100),
     student("катя", 50),
-    student("нильс", 100),
-    student("соломыков", 100)
+    student("нильс", 100), #?
+    student("соломыков", 100) #?
 ]
 
 diary = []
