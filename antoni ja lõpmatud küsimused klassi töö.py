@@ -1,3 +1,4 @@
+#набросок с уроков
 import random
 
 class student:
