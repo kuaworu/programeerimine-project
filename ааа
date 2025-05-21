@@ -14,18 +14,41 @@ class MurderStatsManager:
     def get_stats(self):
         return self.data
 
+    def get_city_stats(self, continent, country, city):
+        return self.data.get(continent, {}).get(country, {}).get(city, None)
+
+    def remove_city(self, continent, country, city):
+        try:
+            del self.data[continent][country][city]
+            # Удаляем пустые уровни
+            if not self.data[continent][country]:
+                del self.data[continent][country]
+            if not self.data[continent]:
+                del self.data[continent]
+        except KeyError:
+            print("City not found.")
+
 
 # Пример использования
 if __name__ == "__main__":
     stats = MurderStatsManager()
 
-    # Добавляем данные по Европе
+    # Данные от ученика A
     stats.add_data("Europe", "Estonia", "Tallinn", 5)
     stats.add_data("Europe", "Finland", "Helsinki", 3)
-
-    # Добавляем данные по Азии
     stats.add_data("Asia", "Japan", "Tokyo", 8)
 
-    # Выводим результат
+    # Новые данные по Африке
+    stats.add_data("Africa", "Nigeria", "Lagos", 12)
+    stats.add_data("Africa", "South Africa", "Cape Town", 7)
+
+    # Тестирование новых методов
+    print("Данные по городу Lagos:")
+    print(stats.get_city_stats("Africa", "Nigeria", "Lagos"))
+
+    print("\nУдаление города Cape Town...")
+    stats.remove_city("Africa", "South Africa", "Cape Town")
+
+    print("\nОбновлённые данные:")
     from pprint import pprint
     pprint(stats.get_stats())
